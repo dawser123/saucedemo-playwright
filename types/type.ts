@@ -1,6 +1,6 @@
 export type Credentials = {
-	username: string
-	password: string
+	userName: string
+	userPassword: string
 }
 
 export type LoginData = {

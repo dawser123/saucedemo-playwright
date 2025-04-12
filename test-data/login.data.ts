@@ -2,11 +2,11 @@ import { LoginData } from "../types/type";
 
 export const loginData:LoginData = {
 	valid: {
-		username: 'standard_user',
-		password: 'secret_sauce',
+		userName: 'standard_user',
+		userPassword: 'secret_sauce',
 	},
     invalid:{
-        username: 'standard',
-		password: 'secret',
+        userName: 'standard',
+		userPassword: 'secret',
     }
 }

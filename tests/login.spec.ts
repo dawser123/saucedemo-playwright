@@ -1,53 +1,49 @@
 import test, { expect } from '@playwright/test'
 import { loginData } from '../test-data/login.data'
+import { LoginPage } from '../pages/login.page'
 test.describe('User login to saucedemo', () => {
+	let loginPage: LoginPage
 	test.beforeEach(async ({ page }) => {
+		loginPage = new LoginPage(page)
 		await page.goto('/')
 	})
-	test('should log in successfully with valid credentials', async ({ page }) => {
+	test('should log in successfully with valid credentials', async () => {
 		//Arrange
-		const username = loginData.valid.username
-		const password = loginData.valid.password
+		const userName = loginData.valid.userName
+		const userPassword = loginData.valid.userPassword
 		///Act
-		await page.locator('[data-test="username"]').fill(username)
-		await page.locator('[data-test="password"]').fill(password)
-		await page.locator('[data-test="login-button"]').click()
+		await loginPage.login(userName, userPassword)
 		//Assert
-		await expect(page.locator('[data-test="title"]')).toBeVisible()
+		await expect(loginPage.title).toBeVisible()
 	})
-
-	test('should display error when username and password are empty', async ({ page }) => {
+	test('should display error when userName and userPassword are empty', async () => {
 		//Arrange
 		//Act
-		await page.locator('[data-test="login-button"]').click()
+		await loginPage.loginButton.click()
 		//Assert
-    await expect(page.locator('[data-test="username"]')).toHaveText('')
-    await expect(page.locator('[data-test="password"]')).toHaveText('')
-		await expect(page.locator('[data-test="error"]')).toHaveText('Epic sadface: Username is required')
+		await expect(loginPage.loginInput).toHaveText('')
+		await expect(loginPage.passwordInput).toHaveText('')
+		await expect(loginPage.errorMessage).toHaveText('Epic sadface: Username is required')
 	})
-	test('should display error when username is too short', async ({ page }) => {
+	test('should display error when userName is too short', async () => {
 		//Arrange
-		const username = loginData.invalid.username
-		const password = loginData.valid.password
+		const userName = loginData.invalid.userName
+		const userPassword = loginData.valid.userPassword
 		//Act
-		await page.locator('[data-test="username"]').fill(username)
-		await page.locator('[data-test="password"]').fill(password)
-		await page.locator('[data-test="login-button"]').click()
+		await loginPage.login(userName, userPassword)
 		//Assert
-		await expect(page.locator('[data-test="error"]')).toHaveText(
+		await expect(loginPage.errorMessage).toHaveText(
 			'Epic sadface: Username and password do not match any user in this service'
 		)
 	})
-	test('should display error when password is too short', async ({ page }) => {
+	test('should display error when userPassword is too short', async () => {
 		//Arrange
-		const username = loginData.valid.username
-		const password = loginData.invalid.password
+		const userName = loginData.valid.userName
+		const userPassword = loginData.invalid.userPassword
 		//Act
-		await page.locator('[data-test="username"]').fill(username)
-		await page.locator('[data-test="password"]').fill(password)
-		await page.locator('[data-test="login-button"]').click()
+		await loginPage.login(userName, userPassword)
 		//Assert
-		await expect(page.locator('[data-test="error"]')).toHaveText(
+		await expect(loginPage.errorMessage).toHaveText(
 			'Epic sadface: Username and password do not match any user in this service'
 		)
 	})
