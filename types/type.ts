@@ -1,7 +1,12 @@
 export type Credentials = {
-	userName: string
+	userLogin: string
+	userName:string
+	userLastName:string
 	userPassword: string
+	userPostalCode:string
 }
+
+
 export type LoginData = {
 	valid: Credentials
 	invalid: Credentials
@@ -13,3 +18,4 @@ export type Product = {
 }
 export type Items=Product[]
 
+export type priceTexts=string[]

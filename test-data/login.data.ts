@@ -1,12 +1,18 @@
-import { LoginData } from "../types/type";
+import { LoginData } from '../types/type'
 
-export const loginData:LoginData = {
+export const loginData: LoginData = {
 	valid: {
-		userName: 'standard_user',
+		userLogin: 'standard_user',
 		userPassword: 'secret_sauce',
+		userName: 'James',
+		userLastName: 'Smith',
+		userPostalCode:'1234'
 	},
-    invalid:{
-        userName: 'standard',
+	invalid: {
+		userName: '',
+		userLastName: '',
+		userPostalCode:'',
+		userLogin: 'standard',
 		userPassword: 'secret',
-    }
+	},
 }
