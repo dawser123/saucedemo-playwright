@@ -12,8 +12,8 @@ export class LoginPage {
 		this.title = this.page.locator('[data-test="title"]')
 		this.errorMessage=this.page.locator('[data-test="error"]')
 	}
-	async login(userName: string, userPassword: string): Promise<void> {
-		await this.loginInput.fill(userName)
+	async login(userLogin: string, userPassword: string): Promise<void> {
+		await this.loginInput.fill(userLogin)
 		await this.passwordInput.fill(userPassword)
 		await this.loginButton.click()
 	}

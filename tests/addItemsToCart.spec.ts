@@ -6,12 +6,12 @@ import { AddToCartPage } from '../pages/addToCartPage.page'
 test.describe('Adding items to cart', () => {
 	let addToCartPage: AddToCartPage
 	test.beforeEach(async ({ page }) => {
-		const userName = loginData.valid.userName
+		const userLogin = loginData.valid.userLogin
 		const userPassword = loginData.valid.userPassword
 
 		await page.goto('/')
 		const loginPage = new LoginPage(page)
-		await loginPage.login(userName, userPassword)
+		await loginPage.login(userLogin, userPassword)
 
 		addToCartPage = new AddToCartPage(page)
 	})

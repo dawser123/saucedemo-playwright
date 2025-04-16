@@ -9,10 +9,9 @@ test.describe('User login to saucedemo', () => {
 	})
 	test('should log in successfully with valid credentials', async () => {
 		//Arrange
-		const userName = loginData.valid.userName
-		const userPassword = loginData.valid.userPassword
+		const {userLogin,userPassword}=loginData.valid
 		///Act
-		await loginPage.login(userName, userPassword)
+		await loginPage.login(userLogin, userPassword)
 		//Assert
 		await expect(loginPage.title).toBeVisible()
 	})
@@ -27,10 +26,10 @@ test.describe('User login to saucedemo', () => {
 	})
 	test('should display error when userName is too short', async () => {
 		//Arrange
-		const userName = loginData.invalid.userName
-		const userPassword = loginData.valid.userPassword
+		const {userLogin}=loginData.valid
+		const {userPassword}=loginData.invalid
 		//Act
-		await loginPage.login(userName, userPassword)
+		await loginPage.login(userLogin, userPassword)
 		//Assert
 		await expect(loginPage.errorMessage).toHaveText(
 			'Epic sadface: Username and password do not match any user in this service'
@@ -38,10 +37,10 @@ test.describe('User login to saucedemo', () => {
 	})
 	test('should display error when userPassword is too short', async () => {
 		//Arrange
-		const userName = loginData.valid.userName
-		const userPassword = loginData.invalid.userPassword
+		const {userLogin}=loginData.valid
+		const {userPassword}=loginData.invalid
 		//Act
-		await loginPage.login(userName, userPassword)
+		await loginPage.login(userLogin, userPassword)
 		//Assert
 		await expect(loginPage.errorMessage).toHaveText(
 			'Epic sadface: Username and password do not match any user in this service'
