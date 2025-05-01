@@ -27,4 +27,3 @@ SauceDemo Tests with Playwright & TypeScript This repository contains automated 
    npx playwright show-report
 
    ```
-## Test Scenarios
